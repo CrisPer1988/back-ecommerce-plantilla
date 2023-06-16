@@ -13,5 +13,6 @@ router
 .route("/:id")
 .delete(usersController.deleteUser)
 .get(usersController.findOneUser)
+.patch(usersController.updateUser)
 
 module.exports = router

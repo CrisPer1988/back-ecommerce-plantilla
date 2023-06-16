@@ -47,6 +47,22 @@ exports.findOneUser = async(req, res, next) => {
     })
 }
 
+exports.updateUser = async(req, res, next) => {
+    const {id} = req.params
+    const {userName, email} = req.body
+
+    const user = await usersServices.findOneUser(id)
+
+    const userUpdate = await usersServices.updateUser(user, {
+        userName, email
+    })
+
+    return res.status(200).json({
+        status: "succes",
+        userUpdate
+    })
+}
+
 exports.deleteUser = async(req, res, next) => {
     const {id} = req.params
     const user = await usersServices.deleteUser(id)

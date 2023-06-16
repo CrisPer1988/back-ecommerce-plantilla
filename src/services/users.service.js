@@ -41,6 +41,16 @@ class UsersServices {
         }
     }
 
+    async updateUser(user, userData) {
+        try {
+            return await user.update(userData)
+            
+        
+        } catch (error) {
+            throw Error(error)
+        }
+    }
+
     async deleteUser(userId) {
        try {
         const user = await this.findOneUser(userId)
