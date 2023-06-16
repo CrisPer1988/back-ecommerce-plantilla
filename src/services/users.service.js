@@ -26,13 +26,24 @@ class UsersServices {
         }
     }
 
+    async findOneUser(userId) {
+        try {
+            const user = await db.Users.findOne({
+                where: {
+                    status: "active",
+                    id: userId
+                }
+            })
+
+            return user
+        } catch (error) {
+            throw Error(error)
+        }
+    }
+
     async deleteUser(userId) {
        try {
-        const user = await db.Users.findOne({
-            where: {
-                id: userId
-            }
-        })
+        const user = await this.findOneUser(userId)
 
         return await user.update({
             status: "disable"

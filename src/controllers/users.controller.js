@@ -37,6 +37,16 @@ exports.findAllUsers = async(req, res, next) => {
     })
 }
 
+exports.findOneUser = async(req, res, next) => {
+    const {id} = req.params
+    const user = await usersServices.findOneUser(id)
+
+    return res.status(200).json({
+        status: "Success",
+        user
+    })
+}
+
 exports.deleteUser = async(req, res, next) => {
     const {id} = req.params
     const user = await usersServices.deleteUser(id)

@@ -9,6 +9,9 @@ router
 .post( usersController.createUser)
 .get( usersController.findAllUsers)
 
-router.delete('/:id', usersController.deleteUser)
+router
+.route("/:id")
+.delete(usersController.deleteUser)
+.get(usersController.findOneUser)
 
 module.exports = router
