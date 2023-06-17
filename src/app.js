@@ -8,6 +8,8 @@ const xss = require('xss-clean');
 
 const usersRouter = require("./routes/users.routes")
 
+const globalErrorHandler = require('./controllers/error.controller');
+const AppError = require('./utils/appError');
 
 const app = express()
 
@@ -28,6 +30,12 @@ const limiter = rateLimit({
   app.use('api/v1', limiter);
 
   app.use("/api/v1/users", usersRouter)
+
+  app.all('*', (req, res, next) => {
+    next(new AppError(`Cannot find ${req.originalUrl} on this server`, 404));
+  });
+  
+  app.use(globalErrorHandler);
 
 
 module.exports = app
