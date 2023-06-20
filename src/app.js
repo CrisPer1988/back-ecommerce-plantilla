@@ -15,6 +15,8 @@ const businessRouter = require('./routes/business.routes');
 const product_categoryRouter = require('./routes/product_category.routes');
 
 const productsRouter = require('./routes/products.routes');
+const purchasesRouter = require('./routes/purchases.routes')
+
 
 
 const globalErrorHandler = require('./controllers/error.controller');
@@ -49,6 +51,8 @@ app.use('/api/v1/product_category', product_categoryRouter);
 
 // Ruta para manejar las solicitudes relacionadas con productos
 app.use('/api/ve/prodcts', productsRouter);
+  // Ruta para manejar las solicitudes de compras
+app.use("/api/v1/purchases", purchasesRouter)
 
 
 app.all('*', (req, res, next) => {

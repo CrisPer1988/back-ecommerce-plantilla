@@ -33,3 +33,16 @@ exports.createBusiness = [
   body('address').notEmpty().withMessage('Address cannot be empty'),
   validFields,
 ];
+
+exports.PurchaseValidation = [
+  body('product_Id').notEmpty().withMessage('product id no empty'),
+  body('user_Id')
+    .notEmpty()
+    .withMessage('Id user is empty'),
+  body('quantity')
+    .notEmpty()
+    .withMessage("this value is empty")
+    .isBase64()
+    .withMessage("value is number"),
+  validFields,
+];
