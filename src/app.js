@@ -16,6 +16,7 @@ const product_categoryRouter = require('./routes/product_category.routes');
 
 const productsRouter = require('./routes/products.routes');
 const purchasesRouter = require('./routes/purchases.routes')
+const usersAdminsRouter = require('./routes/usersAdmins.routes')
 
 
 
@@ -43,6 +44,8 @@ app.use('api/v1', limiter);
 //! Uso de las rutas
 // Ruta para manejar las solicitudes relacionadas con usuarios
 app.use('/api/v1/users', usersRouter);
+// Ruta para manejar las solicitudes relacionadas con administradores
+app.use("/api/v1/admins", usersAdminsRouter)
 // Ruta para manejar las solicitudes relacionadas con negocios
 app.use('/api/v1/business', businessRouter);
 
