@@ -1,13 +1,57 @@
 const ProductsService = require('../services/products.service');
 const catchAsync = require('../utils/catchAsync');
+const { ref, uploadBytes } = require('firebase/storage');
+const db = require('../database/models/index');
+const storage = require('../utils/firebase');
 
 const productsService = new ProductsService();
+
+exports.createProduct = catchAsync(async (req, res, next) => {
+  const { name, description, price, stock, business_id, brand } = req.body;
+
+  const product = await productsService.createProducts({
+    name,
+    description,
+    price,
+    stock,
+    business_id,
+    brand,
+  });
+
+  const productImagesPromises = req.files.map(async (file) => {
+    const imgRef = ref(
+      storage,
+      `product_images/${Date.now()}-${file.originalname}`
+    );
+    const imgUploaded = await uploadBytes(imgRef, file.buffer);
+
+    return await db.Product_img.create({
+      product_id: product.id,
+      product_imgUrl: imgUploaded.metadata.fullPath,
+    });
+  });
+
+  await Promise.all(productImagesPromises);
+
+  return res.status(201).json({
+    status: 'success',
+    message: 'The product has been created',
+    product,
+  });
+});
 
 exports.findAllProducts = catchAsync(async (req, res, next) => {
   const products = await productsService.findAllProducts();
 
+  if (!products.length) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'No product was found',
+    });
+  }
+
   return res.status(200).json({
-    status: 'Success',
+    status: 'sucess',
     result: products.length,
     products,
   });

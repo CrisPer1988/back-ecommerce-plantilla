@@ -6,19 +6,13 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 const xss = require('xss-clean');
 
-//! Importación de rutas
-// Aqui agregarás tus rutas
-
 const usersRouter = require('./routes/users.routes');
 const businessRouter = require('./routes/business.routes');
 
 const product_categoryRouter = require('./routes/product_category.routes');
 
 const productsRouter = require('./routes/products.routes');
-const purchasesRouter = require('./routes/purchases.routes')
-const usersAdminsRouter = require('./routes/usersAdmins.routes')
-
-
+const purchasesRouter = require('./routes/purchases.routes');
 
 const globalErrorHandler = require('./controllers/error.controller');
 const AppError = require('./utils/appError');
@@ -44,8 +38,6 @@ app.use('api/v1', limiter);
 //! Uso de las rutas
 // Ruta para manejar las solicitudes relacionadas con usuarios
 app.use('/api/v1/users', usersRouter);
-// Ruta para manejar las solicitudes relacionadas con administradores
-app.use("/api/v1/admins", usersAdminsRouter)
 // Ruta para manejar las solicitudes relacionadas con negocios
 app.use('/api/v1/business', businessRouter);
 
@@ -54,13 +46,17 @@ app.use('/api/v1/product_category', product_categoryRouter);
 
 // Ruta para manejar las solicitudes relacionadas con productos
 app.use('/api/ve/prodcts', productsRouter);
-  // Ruta para manejar las solicitudes de compras
-app.use("/api/v1/purchases", purchasesRouter)
-
+// Ruta para manejar las solicitudes de compras
+app.use('/api/v1/purchases', purchasesRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server`, 404));
 });
+
+app.use('api/v1', limiter);
+
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/products', productsRouter);
 
 app.use(globalErrorHandler);
 
