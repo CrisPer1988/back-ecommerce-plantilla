@@ -28,6 +28,21 @@ exports.createUser = [
   validFields,
 ];
 
+exports.createAdmin = [
+  body('userName').notEmpty().withMessage('Username cannot be empty'),
+  body('email')
+    .notEmpty()
+    .withMessage('Email cannot be empty')
+    .isEmail()
+    .withMessage('Use format email'),
+  body('password')
+    .notEmpty()
+    .withMessage('Password cannot be empty')
+    .isLength({ min: 8 })
+    .withMessage('The password must have at least 8 characters'),
+  validFields,
+];
+
 exports.createBusiness = [
   body('name').notEmpty().withMessage('Name cannot be empty'),
   body('address').notEmpty().withMessage('Address cannot be empty'),

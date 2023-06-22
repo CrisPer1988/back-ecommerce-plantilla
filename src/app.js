@@ -6,9 +6,6 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 const xss = require('xss-clean');
 
-//! Importación de rutas
-// Aqui agregarás tus rutas
-
 const usersRouter = require('./routes/users.routes');
 const businessRouter = require('./routes/business.routes');
 
@@ -52,11 +49,14 @@ app.use('/api/ve/prodcts', productsRouter);
 // Ruta para manejar las solicitudes de compras
 app.use('/api/v1/purchases', purchasesRouter);
 
-app.use('api/v1', limiter);
-
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server`, 404));
 });
+
+app.use('api/v1', limiter);
+
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/products', productsRouter);
 
 app.use(globalErrorHandler);
 
