@@ -8,7 +8,9 @@ const xss = require('xss-clean');
 
 const usersRouter = require('./routes/users.routes');
 const businessRouter = require('./routes/business.routes');
+const categoryRouter = require('./routes/category.routes')
 
+const business_imgRouter = require('./routes/business_img.routes')
 const product_categoryRouter = require('./routes/product_category.routes');
 
 const productsRouter = require('./routes/products.routes');
@@ -40,7 +42,10 @@ app.use('api/v1', limiter);
 app.use('/api/v1/users', usersRouter);
 // Ruta para manejar las solicitudes relacionadas con negocios
 app.use('/api/v1/business', businessRouter);
-
+//Ruta que se encarga de hacer las relaciones del negocio y las imagenes 
+app.use('/api/v1/business_img',  business_imgRouter ) ;
+//Ruta para manejar las categorias 
+app.use('/api/v1/category', categoryRouter );
 // Ruta que se encarga de aser relaciones de productos y categorias
 app.use('/api/v1/product_category', product_categoryRouter);
 
