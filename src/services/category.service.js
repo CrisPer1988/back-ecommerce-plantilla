@@ -49,7 +49,7 @@ class CategoryServices {
         }
     }
 
-    async deleteCategory(category) {
+    async deleteCategory(category, data) {
         try {
             if(!category) throw new AppError(`Category not found`, 404);
 
