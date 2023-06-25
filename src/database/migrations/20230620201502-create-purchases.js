@@ -3,54 +3,44 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Purchases', {
-      id:{
-        type:Sequelize.INTEGER,
-        primaryKey:true,
-        autoIncrement:true,
-        allowNull:false,
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
       },
-      user_Id:{
-        type:Sequelize.INTEGER,
-        defaultValue:2,
-        allowNull:false,
-        // references:{
-        //   model:"users",
-        //   key:"id",
-        // }
+      user_Id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      product_Id:{
-        type:Sequelize.INTEGER,
-        defaultValue:2,
-        allowNull:false,
-        // references:{
-        //   model:"products",
-        //   key:"id",
-        // }
+      product_Id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      totalPrice:{
-        type:Sequelize.INTEGER,
-        allowNull:false,
+      totalPrice: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      quantity:{
-        type:Sequelize.INTEGER,
-        allowNull:false,
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       status: {
         allowNull: false,
-        type: Sequelize.ENUM('active','disable'),
-        defaultValue:'active'
+        type: Sequelize.ENUM('active', 'disable'),
+        defaultValue: 'active',
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Purchases');
-  }
+  },
 };
