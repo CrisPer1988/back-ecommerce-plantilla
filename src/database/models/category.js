@@ -1,33 +1,33 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
-    
     static associate(models) {
-      // define association here
+      Category.hasMany(models.product_category, { foreignKey: 'category_id' });
     }
   }
-  Category.init({
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
+  Category.init(
+    {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM('active', 'disable'),
+        defaultValue: 'active',
+        allowNull: false,
+      },
     },
-    name:{
-       type : DataTypes.STRING,
-       allowNull: false,
-    } ,
-    status: {
-      type: DataTypes.ENUM('active', 'disable'),
-      defaultValue: 'active',
-      allowNull: false,
+    {
+      sequelize,
+      modelName: 'Category',
     }
-  }, {
-    sequelize,
-    modelName: 'Category',
-  });
+  );
   return Category;
 };

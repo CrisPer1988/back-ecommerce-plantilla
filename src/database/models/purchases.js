@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Purchases extends Model {
     /**
@@ -10,51 +8,44 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // audioVisual.belongsTo(models.products, { foreignKey: 'product_id' });
-      // audioVisual.hasMany(models.users, { foreignKey: 'user_Id' });
+      Purchases.belongsTo(models.Users, { foreignKey: 'user_Id' });
+      Purchases.hasMany(models.Products, { foreignKey: 'product_Id' });
     }
   }
-  Purchases.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
+  Purchases.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
+      totalPrice: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      user_Id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      product_Id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      status: {
+        allowNull: false,
+        type: DataTypes.ENUM('active', 'disable'),
+        defaultValue: 'active',
+      },
     },
-    totalPrice: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    user_Id:{
-      type:DataTypes.INTEGER,
-      allowNull:false,
-      defaultValue:2,
-      // references:{
-      //   model:"users",
-      //   key:"id",
-      // }
-    },
-    product_Id:{
-      type:DataTypes.INTEGER,
-      allowNull:false,
-      defaultValue:2,
-      // references:{
-      //   model:"products",
-      //   key:"id",
-      // }
-    },
-    status: {
-      allowNull: false,
-      type: DataTypes.ENUM('active', 'disable'),
-      defaultValue: 'active',
-    },
-  }, {
-    sequelize,
-    modelName: 'Purchases',
-  });
+    {
+      sequelize,
+      modelName: 'Purchases',
+    }
+  );
   return Purchases;
 };
