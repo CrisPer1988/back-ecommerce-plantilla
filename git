@@ -1,0 +1,30 @@
+[33mc4a0d01[m[33m ([m[1;36mHEAD -> [m[1;32mcristian[m[33m, [m[1;31morigin/cristian[m[33m)[m seeders
+[33m97ec88a[m fix: Solución de primay keys duplicadas
+[33m961c774[m solucion de problema primaryKey
+[33ma06604a[m add-references
+[33ma20fb3b[m functions Category and Business_img
+[33m29f8614[m fix: routes and endpoints
+[33m269670e[m fix: routes and endpoints
+[33mdb01ffd[m feat: agregué las tablas category y business_img
+[33mb688169[m tabla category y business_img
+[33m864cb2a[m Merge pull request #6 from CrisPer1988/alex2
+[33m0e44d5c[m subir fotos de productos con ultimo pull desde main
+[33m717f36b[m subir imagenes de producto a product_imgs
+[33m3afec66[m Merge pull request #5 from CrisPer1988/cristian
+[33m9e726e4[m 010
+[33m0e0efe0[m feat:funcionalidad tabla purchases
+[33md2dfc5e[m feat:funcionalidad tabla purchases
+[33mbbce105[m Merge pull request #3 from CrisPer1988/aaron
+[33ma90a26d[m Merge branch 'main' into aaron
+[33mde7a00d[m feat:Agrege las funcionalidades de Products_category
+[33m1b0cdda[m Merge pull request #2 from CrisPer1988/colombia
+[33m2673095[m feat:agrege funciones, products
+[33m481581c[m feat:
+[33m9e69ed1[m Merge pull request #1 from CrisPer1988/maxcereceda
+[33mf524a47[m feat: structure and funtions business
+[33m4a6c322[m[33m ([m[1;32mcris[m[33m)[m errorHandler
+[33m254a0df[m feat: Create file README.md
+[33mdec7f4b[m all methods Users
+[33ma835627[m continue function Users
+[33m99c412e[m init function Users
+[33m4d4e267[m first commit

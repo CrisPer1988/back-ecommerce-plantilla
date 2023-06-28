@@ -3,14 +3,14 @@ const { AppError, NotFoundError } = require('../utils/appError');
 
 class ProductsServices {
   async createProducts(data) {
-    return await db.products.create(data);
+   
 
-    // try {
-    //   const product = await db.products.create(data);
-    //   return product;
-    // } catch (error) {
-    //   throw new Error(error);
-    // }
+    try {
+      const product = await db.products.create(data);
+      return product;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   async findAllProducts() {
