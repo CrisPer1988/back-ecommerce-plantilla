@@ -14,7 +14,11 @@ const validFields = (req, res, next) => {
 };
 
 exports.createUser = [
-  body('userName').notEmpty().withMessage('Username cannot be empty'),
+  body('userName')
+    .notEmpty()
+    .withMessage('Username cannot be empty')
+    .isString()
+    .withMessage('Must be a valid name'),
   body('email')
     .notEmpty()
     .withMessage('Email cannot be empty')
@@ -25,6 +29,12 @@ exports.createUser = [
     .withMessage('Password cannot be empty')
     .isLength({ min: 8 })
     .withMessage('The password must have at least 8 characters'),
+  validFields,
+];
+
+exports.updateUser = [
+  body('userName').isString().withMessage('Must be a valid name'),
+  body('email').isEmail().withMessage('Must be a valid email'),
   validFields,
 ];
 
@@ -51,13 +61,11 @@ exports.createBusiness = [
 
 exports.PurchaseValidation = [
   body('product_Id').notEmpty().withMessage('product id no empty'),
-  body('user_Id')
-    .notEmpty()
-    .withMessage('Id user is empty'),
+  body('user_Id').notEmpty().withMessage('Id user is empty'),
   body('quantity')
     .notEmpty()
-    .withMessage("this value is empty")
+    .withMessage('this value is empty')
     .isBase64()
-    .withMessage("value is number"),
+    .withMessage('value is number'),
   validFields,
 ];

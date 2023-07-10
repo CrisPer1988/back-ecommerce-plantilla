@@ -1,12 +1,12 @@
 const bcrypt = require('bcryptjs');
 const generateJWT = require('../utils/jwt');
 const UsersServices = require('../services/users.service');
-const AppError = require("../utils/appError")
-const catchAsync = require("../utils/catchAsync")
+const AppError = require('../utils/appError');
+const catchAsync = require('../utils/catchAsync');
 
 const usersServices = new UsersServices();
 
-exports.createUser = catchAsync(async(req, res, next) => {
+exports.createUser = catchAsync(async (req, res, next) => {
   const { userName, email, password } = req.body;
 
   const salt = await bcrypt.genSalt(8);
@@ -30,8 +30,14 @@ exports.createUser = catchAsync(async(req, res, next) => {
   });
 });
 
-exports.findAllUsers = catchAsync(async(req, res, next) => {
+exports.findAllUsers = catchAsync(async (req, res, next) => {
   const users = await usersServices.findAllUsers();
+
+  if (!users.length)
+    return res.status(404).json({
+      status: 'error',
+      message: 'Users cant be found',
+    });
 
   return res.status(200).json({
     status: 'Success',
@@ -40,38 +46,61 @@ exports.findAllUsers = catchAsync(async(req, res, next) => {
   });
 });
 
-exports.findOneUser = catchAsync(async(req, res, next) => {
+exports.findOneUser = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const user = await usersServices.findOneUser(id);
 
+  if (!user)
+    return res.status(404).json({
+      status: 'error',
+      message: 'User cant be found',
+    });
+
   return res.status(200).json({
     status: 'Success',
-    user,
+    user: {
+      name: user.userName,
+      email: user.email,
+    },
   });
 });
 
-exports.updateUser = catchAsync(async(req, res, next) => {
+exports.updateUser = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const { userName, email } = req.body;
 
   const user = await usersServices.findOneUser(id);
 
-  const userUpdate = await usersServices.updateUser(user, {
-    userName,
-    email,
+  if (!user)
+    return res.status(404).json({
+      status: 'error',
+      message: 'User was not found',
+    });
+
+  const userUpdated = await usersServices.updateUser(user, {
+    userName: userName || user.userName,
+    email: email,
   });
 
   return res.status(200).json({
     status: 'succes',
-    userUpdate,
+    message: 'The user has been updated',
+    userUpdate: {
+      name: userUpdated.userName,
+      email: userUpdated.email,
+    },
   });
 });
 
-exports.deleteUser = catchAsync(async(req, res, next) => {
+exports.deleteUser = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const user = await usersServices.deleteUser(id);
 
   return res.status(200).json({
-    status: 'Success',
+    status: 'success',
+    message: 'The user has been disabled',
+    user: {
+      name: user.userName,
+    },
   });
 });

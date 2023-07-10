@@ -35,10 +35,7 @@ class UsersServices {
         },
       });
 
-      if(!user) throw new AppError(`User id: ${userId} not found`, 404);
-
       return user;
-      
     } catch (error) {
       throw Error(error);
     }
@@ -46,7 +43,6 @@ class UsersServices {
 
   async updateUser(user, userData) {
     try {
-      if(!user) throw new AppError(`User not found`, 404);
       return await user.update(userData);
     } catch (error) {
       throw Error(error);
@@ -56,6 +52,8 @@ class UsersServices {
   async deleteUser(userId) {
     try {
       const user = await this.findOneUser(userId);
+
+      if (!user) throw new AppError('The user was not found', 404);
 
       return await user.update({
         status: 'disable',
