@@ -2,18 +2,18 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Business_imgs', {
+    await queryInterface.createTable('Busines_imgs', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
-      business_id: {
-       type:Sequelize.INTEGER,
+      busines_id: {
+       type:Sequelize.UUID,
        allowNull:false,
       },
-      business_imgUrl: {
+      busines_imgUrl: {
          type : Sequelize.STRING,
          allowNull: false,
       } ,
@@ -33,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Business_imgs');
+    await queryInterface.dropTable('Busines_imgs');
   }
 };

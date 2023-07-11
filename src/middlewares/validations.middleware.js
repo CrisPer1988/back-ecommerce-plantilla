@@ -43,15 +43,15 @@ exports.createAdmin = [
   validFields,
 ];
 
-exports.createBusiness = [
+exports.createBusines = [
   body('name').notEmpty().withMessage('Name cannot be empty'),
   body('address').notEmpty().withMessage('Address cannot be empty'),
   validFields,
 ];
 
 exports.PurchaseValidation = [
-  body('product_Id').notEmpty().withMessage('product id no empty'),
-  body('user_Id')
+  body('product_id').notEmpty().withMessage('product id no empty'),
+  body('user_id')
     .notEmpty()
     .withMessage('Id user is empty'),
   body('quantity')

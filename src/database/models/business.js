@@ -1,18 +1,21 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Business extends Model {
+  class Busines extends Model {
     static associate(models) {
-      //Aquí iran las relaciones de tablas
+      Busines.belongsTo(models.Users, { foreignKey: 'user_id' });
+      // Busines.belongsTo(models.UsersAdmins, { foreignKey: 'busines_id' });
+      Busines.hasMany(models.Products, { foreignKey: 'busines_id' });
+      Busines.hasMany(models.Busines_img, { foreignKey: 'busines_id' });
     }
   }
-  Business.init(
+  Busines.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
         allowNull: false,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        type: DataTypes.UUID,
       },
       name: {
         type: DataTypes.STRING,
@@ -23,11 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      product_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       status: {
@@ -38,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Business',
+      modelName: 'Busines',
     }
   );
-  return Business;
+  return Busines;
 };

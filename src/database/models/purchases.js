@@ -10,16 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // audioVisual.belongsTo(models.products, { foreignKey: 'product_id' });
-      // audioVisual.hasMany(models.users, { foreignKey: 'user_Id' });
+      Purchases.belongsTo(models.Users, { foreignKey: 'user_id' });
+      Purchases.belongsTo(models.Products, { foreignKey: 'product_id' });
     }
   }
   Purchases.init({
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
       allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      type: DataTypes.UUID,
     },
     totalPrice: {
       type: DataTypes.INTEGER,
@@ -29,21 +29,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    user_Id:{
-      type:DataTypes.INTEGER,
+    user_id:{
+      type:DataTypes.UUID,
       allowNull:false,
-      defaultValue:2,
       // references:{
       //   model:"users",
       //   key:"id",
       // }
     },
-    product_Id:{
-      type:DataTypes.INTEGER,
+    product_id:{
+      type:DataTypes.UUID,
       allowNull:false,
-      defaultValue:2,
       // references:{
-      //   model:"products",
+      //   model:"product",
       //   key:"id",
       // }
     },

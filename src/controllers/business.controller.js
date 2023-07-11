@@ -1,72 +1,73 @@
-const BusinessService = require('../services/business.service');
+const BusinesService = require('../services/business.service');
 const catchAsync = require('../utils/catchAsync');
 
-const businessService = new BusinessService();
+const businesService = new BusinesService();
 
-exports.createBusiness = catchAsync(async (req, res, next) => {
+exports.createBusines = catchAsync(async (req, res, next) => {
   const { name, address, user_id, product_id } = req.body;
-
-  const business = await businessService.createBusiness({
+  console.log(name, address, user_id )
+  const busines = await businesService.createBusines({
     name,
     address,
     user_id,
-    product_id,
   });
 
   return res.status(201).json({
     status: 'Success',
-    business: {
-      name: business.name,
-      address: business.address,
-      user_id: business.user_id,
-      product_id: business.product_id,
-      status: business.status,
-    },
+    busines
+    // busines: {
+    //   name: busines.name,
+    //   address: busines.address,
+    //   user_id: busines.user_id,
+    //   product_id: busines.product_id,
+    //   status: busines.status,
+    // },
   });
 });
 
-exports.findAllBusinesses = catchAsync(async (req, res, next) => {
-  const businesses = await businessService.findAllBusinesses();
+exports.findAllBusines = catchAsync(async (req, res, next) => {
+  const busines = await businesService.findAllBusines();
 
   return res.status(200).json({
     status: 'Success',
-    results: businesses.length,
-    businesses,
+    results: busines.length,
+    busines,
   });
 });
 
-exports.findOneBusiness = catchAsync(async (req, res, next) => {
+exports.findOneBusines = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const business = await businessService.findOneBusiness(id);
+  const busines = await businesService.findOneBusines(id);
 
   return res.status(200).json({
     status: 'Success',
-    business,
+    busines,
   });
 });
 
-exports.updateBusiness = catchAsync(async (req, res, next) => {
+exports.updateBusines = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const { name, address } = req.body;
 
-  const business = await businessService.findOneBusiness(id);
+  const busines = await businesService.findOneBusines(id);
 
-  const businessUpdate = await businessService.updateBusiness(business, {
+  const businesUpdate = await businesService.updateBusines(busines, {
     name,
     address,
   });
 
   return res.status(200).json({
     status: 'Success',
-    businessUpdate,
+    businesUpdate
   });
 });
 
-exports.deleteBusiness = catchAsync(async (req, res, next) => {
+exports.deleteBusines = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  await businessService.deleteBusiness(id);
+  await businesService.deleteBusines(id);
 
   return res.status(200).json({
     status: 'Success',
+    message:"delete succesfull"
   });
 });

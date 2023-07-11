@@ -1,7 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 
 
-exports.createBusiness_img = catchAsync(async (req, res, next) => {
+exports.createBusines_img = catchAsync(async (req, res, next) => {
   
   return res.status(201).json({
     status: 'Success',
@@ -9,7 +9,7 @@ exports.createBusiness_img = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.findAllBusiness_img = catchAsync(async (req, res, next) => {
+exports.findAllBusines_img = catchAsync(async (req, res, next) => {
 
 
   return res.status(200).json({
@@ -17,19 +17,19 @@ exports.findAllBusiness_img = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.findOneBusiness_img = catchAsync(async (req, res, next) => {
+exports.findOneBusines_img = catchAsync(async (req, res, next) => {
   return res.status(200).json({
     status: 'Success',
   });
 });
 
-exports.updateBusiness_img = catchAsync(async (req, res, next) => {
+exports.updateBusines_img = catchAsync(async (req, res, next) => {
   return res.status(200).json({
     status: 'Success',
   });
 });
 
-exports.deleteBusiness_img = catchAsync(async (req, res, next) => {
+exports.deleteBusines_img = catchAsync(async (req, res, next) => {
   return res.status(200).json({
     status: 'Success',
   });

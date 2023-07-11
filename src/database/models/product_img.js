@@ -6,21 +6,21 @@ module.exports = (sequelize, DataTypes) => {
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
-     */
+     */ 
     static associate(models) {
-      // define association here
+      Product_img.belongsTo(models.Products, { foreignKey: 'product_id' });
     }
   }
   Product_img.init(
     {
       id: {
-        primaryKey: true,
-        autoIncrement: true,
-        type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        type: DataTypes.UUID,
       },
       product_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       product_imgUrl: {

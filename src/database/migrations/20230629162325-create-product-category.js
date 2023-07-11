@@ -1,43 +1,38 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Busines', {
+    await queryInterface.createTable('product_categories', {
       id: {
         allowNull: false,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      name: {
-        type: Sequelize.STRING,
+      product_id: {
+        type: Sequelize.UUID,
         allowNull: false,
       },
-      address: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      user_id: {
+      category_id: {
         type: Sequelize.UUID,
         allowNull: false,
       },
       status: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('active', 'disable'),
+        defaultValue: 'active',
         allowNull: false,
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Busines');
+    await queryInterface.dropTable('product_categories');
   },
 };
