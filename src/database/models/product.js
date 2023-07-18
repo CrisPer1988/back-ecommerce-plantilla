@@ -3,40 +3,50 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UsersAdmins extends Model {
+  class Products extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // UsersAdmins.hasMany(models.Busines, { foreignKey: 'business_id' });
+      Products.belongsTo(models.Busines, { foreignKey: 'busines_id' });
+      Products.hasMany(models.Product_img, { foreignKey: 'product_id' });
+      Products.hasMany(models.Purchases, { foreignKey: 'product_id' });
+      Products.hasMany(models.product_category, { foreignKey: 'product_id' });
     }
   }
-  UsersAdmins.init({
+  Products.init({
     id: {
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    userName: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // busines_id: {
-    //   type: DataTypes.UUID,
-    //   allowNull: false
-    // },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    busines_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     status: {
       type: DataTypes.ENUM('active', 'disable'),
       defaultValue: 'active',
@@ -44,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'UsersAdmins',
+    modelName: 'Products',
   });
-  return UsersAdmins;
+  return Products;
 };

@@ -38,7 +38,7 @@ app.use('api/v1', limiter);
 // Ruta para manejar las solicitudes relacionadas con usuarios
 app.use('/api/v1/users', usersRouter);
 // Ruta para manejar las solicitudes relacionadas con negocios
-app.use('/api/v1/business', businessRouter);
+app.use('/api/v1/busines', businessRouter);
 //Ruta que se encarga de hacer las relaciones del negocio y las imagenes
 app.use('/api/v1/business_img', business_imgRouter);
 //Ruta para manejar las categorias

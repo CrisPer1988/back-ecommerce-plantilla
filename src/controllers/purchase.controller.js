@@ -1,8 +1,11 @@
 const catchAsync = require('../utils/catchAsync');
 const PurchasesServices = require("../services/purchase.service")
 const UsersServices = require("../services/users.service")
+const ProductServices= require("../services/products.service")
 const purchasesServices = new PurchasesServices()
 const usersServices = new UsersServices()
+const productServices = new ProductServices()
+
 
 exports.findAllPurchases = catchAsync(async(req, res, next) => {
     const purchases = await purchasesServices.findAllPurchases()
@@ -23,13 +26,15 @@ exports.findOnePurchases= catchAsync(async(req, res, next) => {
 })
 
 exports.createPurchase= catchAsync(async(req, res, next)=>{
-    const { user_Id, product_Id,  quantity, totalPrice } = req.body
-    // const { product }= req;
-    // const totalPrice=(product.price)*quantity
+    const { user_id, product_id,  quantity, } = req.body
+
+    const product=await productServices.findOneProduct(product_id)
+    await usersServices.findOneUser(user_id)
+    const totalPrice=(product.price)*quantity;
     
 
     const purchase = await purchasesServices.createPurchase({
-        user_Id, product_Id,  quantity, totalPrice
+        user_id, product_id,  quantity, totalPrice
     })
 
     return res.status(201).json({
@@ -40,13 +45,17 @@ exports.createPurchase= catchAsync(async(req, res, next)=>{
 })
 
 exports.updatePurchase = catchAsync(async(req, res, next)=>{
-    const {user_Id , product_Id, quantity } = req.body
-    const { product }= req;
-    const { purchase }= req;
+    const { user_id, product_id,  quantity, } = req.body;
+    const { id } = req.params;
 
+    const product=await productServices.findOneProduct(product_id)
+    await usersServices.findOneUser(user_id)
     const totalPrice=(product.price)*quantity;
+
+    const purchase= await purchasesServices.findOnePurchase(id)
+
     const purchas=await purchasesServices.updatePurchase(purchase,{
-        user_Id, product_Id, quantity,totalPrice
+        user_id, product_id, quantity,totalPrice
     })
 
     return res.status(201).json({

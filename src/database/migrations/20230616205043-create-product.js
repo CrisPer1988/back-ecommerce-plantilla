@@ -2,23 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('product_categories', {
+    await queryInterface.createTable('Products', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
-      product_id: {
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      price: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-
-      category_id: {
+      stock: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-
+      busines_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+      },
+      brand: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       status: {
         type: Sequelize.ENUM('active', 'disable'),
         defaultValue: 'active',
@@ -35,6 +49,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('product_categories');
-  },
+    await queryInterface.dropTable('Products');
+  }
 };

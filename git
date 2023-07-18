@@ -2,7 +2,7 @@
 [33m97ec88a[m fix: Solución de primay keys duplicadas
 [33m961c774[m solucion de problema primaryKey
 [33ma06604a[m add-references
-[33ma20fb3b[m functions Category and Business_img
+[33ma20fb3b[m functions Category and Busines_img
 [33m29f8614[m fix: routes and endpoints
 [33m269670e[m fix: routes and endpoints
 [33mdb01ffd[m feat: agregué las tablas category y business_img
@@ -21,7 +21,7 @@
 [33m2673095[m feat:agrege funciones, products
 [33m481581c[m feat:
 [33m9e69ed1[m Merge pull request #1 from CrisPer1988/maxcereceda
-[33mf524a47[m feat: structure and funtions business
+[33mf524a47[m feat: structure and funtions busines
 [33m4a6c322[m[33m ([m[1;32mcris[m[33m)[m errorHandler
 [33m254a0df[m feat: Create file README.md
 [33mdec7f4b[m all methods Users

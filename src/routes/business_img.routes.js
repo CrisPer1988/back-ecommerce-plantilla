@@ -6,14 +6,14 @@ const router = express.Router();
 
 router
   .route('/')
-  .post( business_imgController.createBusiness_img)
-  .get(business_imgController.findAllBusiness_img);
+  .post( business_imgController.createBusines_img)
+  .get(business_imgController.findAllBusines_img);
 
 router
   .route('/:id')
-  .delete(business_imgController.deleteBusiness_img)
-  .get(business_imgController.findOneBusiness_img)
-  .patch(business_imgController.updateBusiness_img);
+  .delete(business_imgController.deleteBusines_img)
+  .get(business_imgController.findOneBusines_img)
+  .patch(business_imgController.updateBusines_img);
 
 module.exports = router;
 

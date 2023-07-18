@@ -1,54 +1,54 @@
 const db = require('../database/models/index');
 const AppError = require('../utils/appError');
 
-class BusinessService {
-  async createBusiness(data) {
+class BusinesService {
+  async createBusines(data) {
     try {
-      const business = await db.Business.create(data);
+      const busines = await db.Busines.create(data);
 
-      return business;
+      return busines;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async findAllBusinesses() {
+  async findAllBusines() {
     try {
-      const businesses = await db.Business.findAll();
+      const busines = await db.Busines.findAll();
 
-      return businesses;
+      return busines;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async findOneBusiness(businessId) {
+  async findOneBusines(businessId) {
     try {
-      const business = await db.Business.findByPk(businessId);
+      const busines = await db.Busines.findByPk(businessId);
 
-      if (!business)
-        throw new AppError(`Business id: ${businessId} not found`, 404);
+      if (!busines)
+        throw new AppError(`Busines id: ${businessId} not found`, 404);
 
-      return business;
+      return busines;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async updateBusiness(business, businessData) {
+  async updateBusines(busines, businesData) {
     try {
-      if (!business) throw new AppError(`Business not found`, 404);
-      return await business.update(businessData);
+      if (!busines) throw new AppError(`Busines not found`, 404);
+      return await busines.update(businesData);
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async deleteBusiness(businessId) {
+  async deleteBusines(businessId) {
     try {
-      const business = await this.findOneBusiness(businessId);
+      const busines = await this.findOneBusines(businessId);
 
-      return await business.update({
+      return await busines.update({
         status: 'disabled',
       });
     } catch (error) {
@@ -57,4 +57,4 @@ class BusinessService {
   }
 }
 
-module.exports = BusinessService;
+module.exports = BusinesService;

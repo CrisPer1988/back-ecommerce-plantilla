@@ -7,14 +7,14 @@ const storage = require('../utils/firebase');
 const productsService = new ProductsService();
 
 exports.createProduct = catchAsync(async (req, res, next) => {
-  const { name, description, price, stock, business_id, brand } = req.body;
+  const { name, description, price, stock, busines_id, brand } = req.body;
 
   const product = await productsService.createProducts({
     name,
     description,
     price,
     stock,
-    business_id,
+    busines_id,
     brand,
   });
 
@@ -59,7 +59,7 @@ exports.findAllProducts = catchAsync(async (req, res, next) => {
 
 exports.finOneProducts = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const products = await productsService.findOneProducts(id);
+  const products = await productsService.findOneProduct(id);
 
   return res.status(200).json({
     status: 'Success',

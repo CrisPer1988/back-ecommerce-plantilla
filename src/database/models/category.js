@@ -6,20 +6,20 @@ module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
     
     static associate(models) {
-      // define association here
+      Category.hasMany(models.product_category, { foreignKey: 'category_id' });
     }
   }
   Category.init({
     id: {
       allowNull: false,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
     },
     name:{
        type : DataTypes.STRING,
        allowNull: false,
-    } ,
+    },
     status: {
       type: DataTypes.ENUM('active', 'disable'),
       defaultValue: 'active',
