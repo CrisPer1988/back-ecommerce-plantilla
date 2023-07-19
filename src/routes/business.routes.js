@@ -1,4 +1,5 @@
 const express = require('express');
+const upload = require('../utils/multer');
 
 const businesController = require('../controllers/business.controller');
 const validField = require('../middlewares/validations.middleware');
@@ -7,7 +8,11 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(validField.createBusines, businesController.createBusines)
+  .post(
+    upload.single('busines_imgUrl'),
+    validField.createBusines,
+    businesController.createBusines
+  )
   .get(businesController.findAllBusines);
 
 router
