@@ -1,5 +1,5 @@
 const express = require('express');
-const upload = require('../utils/multer');
+const {upload} = require('../utils/multer');
 
 const productsController = require('../controllers/products.controller');
 

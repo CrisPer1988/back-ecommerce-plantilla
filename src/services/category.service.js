@@ -17,6 +17,14 @@ class CategoryServices {
         where: {
           status: 'active',
         },
+        include:[
+          {
+            model:db.product_category,
+            include:[
+              db.Products
+            ]
+          }
+        ]
       });
       return categories;
     } catch (error) {
@@ -31,6 +39,14 @@ class CategoryServices {
           status: 'active',
           id: categoryId,
         },
+        include:[
+          {
+            model:db.product_category,
+            include:[
+              db.Products
+            ]
+          }
+        ]
       });
 
       if (!categoryId)

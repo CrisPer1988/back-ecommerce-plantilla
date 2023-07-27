@@ -72,16 +72,16 @@ module.exports = {
       onUpdate: 'CASCADE',
     });
 
-    await queryInterface.changeColumn('UsersAdmins', 'busines_id', {
-      type: Sequelize.UUID,
-      allowNull: false,
-      references: {
-        model: 'Busines',
-        key: 'id',
-      },
-      onDelete: 'SET NULL',
-      onUpdate: 'CASCADE',
-    });
+    // await queryInterface.changeColumn('UsersAdmins', 'busines_id', {
+    //   type: Sequelize.UUID,
+    //   allowNull: false,
+    //   references: {
+    //     model: 'Busines',
+    //     key: 'id',
+    //   },
+    //   onDelete: 'SET NULL',
+    //   onUpdate: 'CASCADE',
+    // });
 
     //relaciones modificadas
     await queryInterface.changeColumn('Products', 'busines_id', {
@@ -105,6 +105,21 @@ module.exports = {
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE',
     });
+
+    await queryInterface.changeColumn('Busines', 'userAd_id', {
+      type: Sequelize.UUID,
+      allowNull: true,
+      references: {
+        model: 'UsersAdmins',
+        key: 'id',
+      },
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE',
+    });
+
+
+
+
   },
 
   async down(queryInterface, Sequelize) {
