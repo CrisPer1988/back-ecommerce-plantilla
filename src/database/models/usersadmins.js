@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // UsersAdmins.hasMany(models.Busines, { foreignKey: 'business_id' });
+      UsersAdmins.hasMany(models.Busines, { foreignKey: 'userAd_id' });
     }
   }
   UsersAdmins.init({
@@ -33,10 +33,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // busines_id: {
-    //   type: DataTypes.UUID,
-    //   allowNull: false
-    // },
     status: {
       type: DataTypes.ENUM('active', 'disable'),
       defaultValue: 'active',

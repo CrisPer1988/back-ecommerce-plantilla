@@ -4,7 +4,6 @@ const categoryServise = new CategoryServise();
 
 exports.createCategory = catchAsync(async (req, res, next) => {
   const { name } = req.body
-
   const category = await categoryServise.createCategory({ name })
   return res.status(201).json({
     status: 'Success',

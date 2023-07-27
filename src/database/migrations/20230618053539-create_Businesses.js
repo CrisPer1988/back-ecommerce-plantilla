@@ -22,6 +22,10 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
       },
+      userAd_id:{
+        type: Sequelize.UUID,
+        allowNull: true,
+      },
       status: {
         type: Sequelize.STRING,
         allowNull: false,

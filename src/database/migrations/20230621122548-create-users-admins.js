@@ -22,10 +22,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      busines_id: {
-        type: Sequelize.UUID,
-        allowNull: false
-      },
       status: {
         type: Sequelize.ENUM('active', 'disable'),
         defaultValue: 'active',

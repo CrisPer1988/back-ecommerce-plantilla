@@ -2,7 +2,7 @@ const ProductsService = require('../services/products.service');
 const catchAsync = require('../utils/catchAsync');
 const { ref, uploadBytes } = require('firebase/storage');
 const db = require('../database/models/index');
-const storage = require('../utils/firebase');
+const {storage} = require('../utils/firebase');
 
 const productsService = new ProductsService();
 
